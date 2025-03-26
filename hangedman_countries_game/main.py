@@ -17,7 +17,7 @@ def letters_in_word(input_word):
     word_dict = {}
     for letter in input_word:
         guess = "_"
-        if letter == " ": guess = letter
+        if letter not in letters_to_chose(): guess = letter
         word_dict[len(word_dict)] = {"letter": letter, "guess": guess}
     return word_dict
 
@@ -39,7 +39,7 @@ def update_guess (input_word, guessed_letter):
 def give_a_hint(hints_list, country):
     hints_dict = {
         0: f"{STARS} HINT: this country is located in {country["region"]} {STARS}",
-        1: f"{STARS} HINT: official currency of this country is {country["currency"]["code"]} : {country["currency"]["name"]} {STARS}",
+        1: f"{STARS} HINT: official currency of this country is {country["currency"]["code"]} {country["currency"]["symbol"]} {STARS}",
         2: f"{STARS} HINT: capital of this country is {country["capital"]} {STARS}",
         3: f"{STARS} HINT: official language of this country is {country["language"]["name"]} {STARS}"
     }
@@ -53,23 +53,20 @@ letters = letters_to_chose()
 with open('countries.json') as country_json:
   country_dict = json.load(country_json)
 
-
 game_on = True
 
 while game_on:
+    game_over = False
     lives = 7
     hints = [0, 1, 2, 3]
+    all_guesses = []
 
     selected_country = random.choice(country_dict)
     country_name = selected_country["name"].upper()
     country_letters = letters_in_word(country_name)
-
     display = def_display_line(country_letters)
-    print(f'{STARS} Lets play Hanged Man! {STARS}\n{STARS} Guess a country {STARS}\n{len(country_name)} symbols:\n{display}')
 
-    game_over = False
-    correct_letters = []
-    all_guesses = []
+    print(f'{STARS} Lets play Hanged Man! {STARS}\n{STARS} Guess a country {STARS}\n{len(country_name)} symbols:\n{display}')
 
     while not game_over:
         print(f"{STARS} {lives}/{len(stages)-1} LIVES LEFT {STARS} ")
@@ -93,7 +90,7 @@ while game_on:
             else:
                 print(f"{guess} is incorrect guess, you lose a life.")
 
-            if lives < 4:
+            if 1 < lives <= 4:
                 give_a_hint(hints, selected_country)
 
             if lives == 0:
