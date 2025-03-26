@@ -70,6 +70,8 @@ while game_on:
 
     while not game_over:
         print(f"{STARS} {lives}/{len(stages)-1} LIVES LEFT {STARS} ")
+        if len(all_guesses) >0:
+            print(f"Your guesses: {', '.join(str(x) for x in all_guesses)}")
         guess = input("Guess a letter or country name: ").upper()
 
         while guess in all_guesses:
