@@ -10,18 +10,22 @@ wallet_start = 1000
 wallet = wallet_start
 bet = 0
 
+def set_a_bet(my_wallet):
+    print(f"You have ${my_wallet}")
+    my_bet = 0
+    while not(0 < my_bet <= my_wallet):
+        try:
+            if my_bet > my_wallet:
+                print("Insufficient amount.")
+            my_bet = int(input("Your bet: $"))
+        except ValueError:
+            print("Please use numbers to set a bet.")
+    system('cls' if name == 'nt' else 'clear')
+    return my_bet
+
 while game_on:
     system('cls' if name == 'nt' else 'clear')
-    print(f"You have ${wallet}")
-    bet = int(input("Your bet: $"))
-    while bet > wallet and game_on:
-        if input("Not enough money, bet again? y/n: ").lower() == 'y':
-            system('cls' if name == 'nt' else 'clear')
-            print(f"You have ${wallet}")
-            bet = int(input("Your bet: $"))
-        else:
-            game_on = False
-    system('cls' if name == 'nt' else 'clear')
+    bet = set_a_bet(wallet)
 
     if game_on:
         game_deck = {"cards" : {}}
@@ -31,7 +35,7 @@ while game_on:
         deck.deal_cards(game_deck,my_hand,2)
         deck.deal_cards(game_deck,dealer_hand,2)
 
-        print("Your hand:")
+        print(f"Your bet: ${bet}\nYour hand:")
         deck.show_hand(my_hand)
         deal_new = (my_hand["final score"] != 21)
 
@@ -40,7 +44,7 @@ while game_on:
             if input("Do you want to deal a card? y/n: ").lower() == "y":
                 deck.deal_cards(game_deck, my_hand, 1)
                 system('cls' if name == 'nt' else 'clear')
-                print("Your hand:")
+                print(f"Your bet: ${bet}\nYour hand:")
                 deck.show_hand(my_hand)
                 if my_hand["score"][0] > 21 or my_hand["final score"]==21:
                     deal_new = False
@@ -66,14 +70,14 @@ while game_on:
         if (my_hand["final score"] == 21
                 or (my_hand["final score"] < 21 < dealer_hand["final score"])
                 or (21 > my_hand["final score"] > dealer_hand["final score"])):
-            print("\nYou win!")
+            print(f"\nYou win ${bet}!")
             score_board["you"] += 1
             streak += 1
             wallet += bet
         elif my_hand["final score"] == dealer_hand["final score"] < 21:
             print("\nIt's a tie!")
         else:
-            print("\nYou lose!")
+            print(f"\nYou lose ${bet}!")
             score_board["dealer"] += 1
             streak = 0
             wallet -= bet
