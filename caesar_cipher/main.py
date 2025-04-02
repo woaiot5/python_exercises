@@ -27,9 +27,11 @@ def decode(message, shift_n):
 
 
 go_on = True
+options = {"encode": encode,
+         "decode": decode,}
 while go_on:
     direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower().strip()
-    if direction not in ['encode', 'decode']:
+    if direction not in options:
         print("Incorrect input.")
     else:
         text = input("Type your message:\n").lower()
@@ -37,10 +39,7 @@ while go_on:
         if shift > 30:
             shift = shift%30
 
-        if direction == "encode":
-            print(f"Result: {encode(text, shift)}")
-        elif direction == "decode":
-            print(f"Result: {decode(text, shift)}")
+        print(f"Result: {options[direction](text, shift)}")
 
     try_again = input("Type 'Y' to return to the main menu: ").upper()
     if try_again != "Y":
