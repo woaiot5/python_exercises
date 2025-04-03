@@ -25,4 +25,4 @@ jobs:
         python-version: "3.10"
     - name: Test my script
       run: |
-        coffee_machine_advanced\main.py
+        python coffee_machine_advanced\main.py
