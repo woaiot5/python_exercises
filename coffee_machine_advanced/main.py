@@ -83,8 +83,7 @@ def order():
     clear_screen()
     while option not in COFFEE_LIST and option not in TECH_LIST:
         clear_screen()
-        option = input(f"What would you like to order? {"/".join(COFFEE_LIST)}"
-                         f"\n[Technical options: {"/".join(TECH_LIST)}]\n").lower()
+        option = input(f"What would you like to order? {"/".join(COFFEE_LIST)}\n[Technical options: {"/".join(TECH_LIST)}]\n").lower()
     return option
 
 
@@ -136,11 +135,8 @@ def process_coins(my_order):
                 inserted_coins["total"] += round_two(inserted_value)
                 if inserted < drink_cost:
                     clear_screen()
-                    print(
-                        f"\n*** You ordered {my_order} ***\n"
-                        f"Please insert ${drink_cost}. Type 'cancel' to cancel transaction.")
-                    print(f"\n___\nYou inserted ${round_two(inserted)}."
-                          f"\nYou still need to insert ${round_two(drink_cost-inserted)}\n___\n")
+                    print(f"\n*** You ordered {my_order} ***\nPlease insert ${drink_cost}. Type 'cancel' to cancel transaction.")
+                    print(f"\n___\nYou inserted ${round_two(inserted)}.\nYou still need to insert ${round_two(drink_cost-inserted)}\n___\n")
     my_change = round_two(inserted - drink_cost)
     print(f"\n*** You ordered {my_order} ***\nYou inserted ${round_two(inserted)}.")
 
