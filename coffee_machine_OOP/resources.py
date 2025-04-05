@@ -33,7 +33,7 @@ def add_resources():
         message = "Incorrect input. Please use positive whole numbers."
         while not check_if_int(add):
             try:
-                add = input(f"Add {key}: ")
+                add = input(f"Add {key} mla: ")
                 if not check_if_int(add):
                     print(message)
                 else:

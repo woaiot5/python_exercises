@@ -15,7 +15,7 @@ def add_or_deduct_money(coins_dict, plus_minus):
     To add, pass 'plus', to deduct, pass 'minus' to the second argument."""
     sign = -1 if plus_minus == "minus" else 1 if plus_minus == "plus" else 0
     for coin_type, value in coins_dict.items():
-        money[coin_type] += round(sign*value,2)
+        money[coin_type] = round(money[coin_type]+(sign*value),2)
 
 
 def process_coins(order):

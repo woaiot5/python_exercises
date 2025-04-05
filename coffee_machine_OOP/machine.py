@@ -1,5 +1,5 @@
 import money, resources
-from tech import clear_screen, check_if_int
+from tech import clear_screen
 from available import menu
 
 
