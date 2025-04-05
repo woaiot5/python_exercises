@@ -1,13 +1,18 @@
-from machine import order, tech, COFFEE_LIST, TECH_LIST
-from resources import make_a_drink
+from CoffeeMaker import CoffeeMaker
+from MoneyMachine import MoneyMachine
+from CoffeeMachine import CoffeeMachine, clear_screen
 
 turn_on = True
+coffee = CoffeeMaker()
+money = MoneyMachine()
+machine = CoffeeMachine(coffee)
 
 while turn_on:
-    option = order()
+    option = machine.order()
 
-    if option in COFFEE_LIST:
-        make_a_drink(option)
+    if option in machine.coffee_list:
+        coffee.make_a_drink(option, money, coffee)
 
-    elif option in TECH_LIST:
-        turn_on = tech[option]()
+    elif option in machine.tech_list:
+        clear_screen()
+        turn_on = machine.action(option)(coffee, money)
