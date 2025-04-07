@@ -1,5 +1,5 @@
 from question_model import Question
-from data import question_data
+from data import question_politics
 from quiz_brain import QuizBrain
 from os import system, name
 import random
@@ -9,9 +9,9 @@ def clear_screen():
 
 
 question_bank = []
-random.shuffle(question_data)
-for q in question_data:
-    question_bank.append(Question(q["text"], q["answer"]))
+random.shuffle(question_politics)
+for q in question_politics:
+    question_bank.append(Question(q["question"], q["correct_answer"]))
 
 quiz = QuizBrain(question_bank)
 

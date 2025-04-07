@@ -14,7 +14,7 @@ class QuizBrain:
             print("That's correct!")
         else:
             print("Incorrect :(")
-        input(f"Your score: {self.score}\n")
+        input(f"Your score: {self.score} out of {self.question_number}\n")
 
 
 
