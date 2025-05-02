@@ -48,7 +48,8 @@ while new_game:
 
     game_is_on = True
     while game_is_on:
-        sleep_time = 0.08 if score_board.score < 10 else 0.05 if score_board.score < 20 else 0.03
+        # sleep_time = 0.08 if score_board.score < 10 else 0.05 if score_board.score < 20 else 0.03
+        sleep_time = 0.8
         time.sleep(sleep_time)
         snake.move()
         new_food.check_food_eaten(snake)
